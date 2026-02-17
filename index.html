@@ -3,167 +3,80 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Passione per il Giappone – Wabi‑Sabi</title>
+<title>Card 30x40 – dimensione fissa</title>
 <style>
   :root{
-    /* Palette naturale e calda */
-    --paper: #f6f2ea;         /* carta */
-    --ink:   #3a3a31;         /* inchiostro */
-    --mute:  #9a9483;         /* testo attenuato */
-    --leaf:  #7e8a7a;         /* verde salvia */
-    --clay:  #b99f7a;         /* terra/argilla */
-    --accent:#7b5d47;         /* legno/scuro */
-    --radius: 14px;
+    --bg: #ffffff;
+    --ink:#222;
+    --muted:#666;
+    --radius:16px;
+    --border:#e6e6e6;
+    --accent:#c0392b;
   }
+  *{ box-sizing:border-box }
 
-  * { box-sizing: border-box; }
-  html, body { height: 100%; }
   body{
-    margin:0; padding:24px;
-    background: var(--paper);
+    margin:0; padding:24px; background:#f7f7f7;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    display:flex; align-items:center; justify-content:center; min-height:100vh;
+  }
+
+  .card-fixed{
+    width: 1134px;     /* ≈ 30 cm @96dpi */
+    height: 1512px;    /* ≈ 40 cm @96dpi */
+    background: var(--bg);
     color: var(--ink);
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", sans-serif;
-    display:flex; align-items:center; justify-content:center;
-  }
-
-  /* Card */
-  .card{
-    width: min(92vw, 560px);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
     overflow: hidden;
-    background: #fbf9f3;
-    box-shadow:
-      0 1px 0 rgba(0,0,0,.025),
-      0 12px 28px rgba(0,0,0,.08);
-    transform: translateY(0);
-    transition: transform .35s ease, box-shadow .35s ease, filter .35s ease;
-    position: relative;
-    isolation: isolate;
-  }
-  .card:hover{
-    transform: translateY(-2px);
-    box-shadow:
-      0 1px 0 rgba(0,0,0,.03),
-      0 16px 36px rgba(0,0,0,.11);
-    filter: saturate(1.02);
+    display: grid;
+    grid-template-rows: 58% 42%;
   }
 
-  /* Leggera “texture carta” usando un gradiente granulare */
-  .grain{
-    position:absolute; inset:0; z-index:0; pointer-events:none;
-    background: radial-gradient(1200px 600px at 20% 10%, rgba(0,0,0,.03), transparent 50%),
-                radial-gradient(900px 500px at 80% 90%, rgba(0,0,0,.025), transparent 45%);
-    mix-blend-mode: multiply;
-  }
-
-  /* Hero immagine con lieve zoom-respiro */
-  .hero{
-    position: relative; height: 260px; overflow: hidden; background: #e9e4d8;
-  }
-  .hero img{
+  .card-media img{
     width:100%; height:100%; object-fit: cover; display:block;
-    transform: scale(1);
-    transition: transform 10s ease;
-    filter: contrast(1.02) saturate(1.02);
-  }
-  .card:hover .hero img{
-    transform: scale(1.04);
   }
 
-  /* Maschera/ombreggiatura molto leggera per leggibilità */
-  .fade{
-    position:absolute; inset:0; pointer-events:none;
-    background: linear-gradient(180deg, rgba(251,249,243,0) 60%, rgba(251,249,243,.55) 100%);
+  .card-body{
+    display:grid; grid-template-rows:auto 1fr auto;
+    gap: 18px; padding: 28px;
   }
+  .card-title{ margin:0; font-size: 2.2rem; line-height:1.2; font-weight: 800; }
+  .card-desc{ margin:0; font-size: 1.2rem; line-height:1.7; color: var(--muted); }
 
-  /* Contenuto */
-  .content{
-    position: relative; z-index:1;
-    padding: 18px 18px 20px 18px;
+  .card-cta{
+    justify-self: start;
+    display:inline-flex; align-items:center; gap:12px;
+    background: var(--accent); color:#fff; text-decoration:none;
+    padding: 14px 20px; border-radius: 12px; font-weight: 800;
+    transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
+    box-shadow: 0 10px 20px rgba(192,57,43,.25);
+    font-size: 1.05rem;
   }
-  .eyebrow{
-    font-size: 12px; letter-spacing:.12em; text-transform: uppercase;
-    color: var(--mute);
-    margin-bottom: 8px;
-  }
-  .title{
-    font-size: 22px; line-height:1.25; margin:0 0 8px; color: var(--ink);
-    font-weight: 700;
-  }
-  .desc{
-    font-size: 15px; line-height:1.7; color:#4a4a40; margin:0 0 18px;
-  }
+  .card-cta:hover{ background:#a83225; transform: translateY(-1px); }
 
-  /* Pulsante Wabi‑Sabi: toni naturali, micro-hover sobrio */
-  .cta{
-    display:inline-flex; align-items:center; gap:10px;
-    background: linear-gradient(180deg, #e7dfd3, #ddd4c5);
-    color: #2f2f27;
-    text-decoration:none; font-weight: 600;
-    padding: 10px 16px; border-radius: 999px;
-    border: 1px solid rgba(0,0,0,.06);
-    box-shadow: 0 2px 0 rgba(0,0,0,.02), 0 10px 18px rgba(0,0,0,.06) inset;
-    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-  }
-  .cta:hover{
-    transform: translateY(-1px);
-    box-shadow: 0 2px 0 rgba(0,0,0,.02), 0 14px 22px rgba(0,0,0,.08) inset;
-    background: linear-gradient(180deg, #efe8dc, #e3dacb);
-  }
-  .cta .dot{
-    width:8px; height:8px; border-radius:999px; background: var(--accent);
-    opacity:.9;
-    transition: transform .25s ease;
-  }
-  .cta:hover .dot{ transform: translateX(2px); }
-
-  /* Badge delicato, come timbro */
-  .badge{
-    position:absolute; top:12px; right:12px; z-index:1;
-    background: rgba(183, 164, 132, .88);
-    color:#fff; font-size:12px; letter-spacing:.06em;
-    padding:6px 10px; border-radius: 999px;
-    backdrop-filter: blur(2px);
-  }
-
-  /* Riduci animazioni per utenti sensibili al movimento */
   @media (prefers-reduced-motion: reduce){
-    .card, .card:hover{ transform:none; }
-    .hero img, .card:hover .hero img{ transition: none; transform:none; }
-    .cta, .cta:hover, .cta .dot{ transition: none; }
-  }
-
-  /* Responsive */
-  @media (min-width: 560px){
-    .hero{ height: 300px; }
-    .title{ font-size: 24px; }
+    .card-cta, .card-cta:hover{ transition:none; transform:none; }
   }
 </style>
 </head>
 <body>
 
-<article class="card" role="region" aria-label="Passione per il Giappone – Wabi‑Sabi">
-  <span class="grain" aria-hidden="true"></span>
-  <span class="badge" aria-hidden="true">wabi‑sabi</span>
-
-  <div class="hero">
-    <!-- Sostituisci l'immagine con una tua (Kyoto, tatami, ceramica, washi, ecc.) -->
-    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7f?auto=format&fit=crop&w=1600&q=80" alt="Paesaggio giapponese in stile wabi‑sabi" />
-    <div class="fade" aria-hidden="true"></div>
+<article class="card-fixed" role="region" aria-label="Card 30x40 – dimensione fissa">
+  <div class="card-media">
+    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7f?auto=format&fit=crop&w=1600&q=80"
+         alt="Paesaggio giapponese minimal in stile wabi-sabi">
   </div>
 
-  <div class="content">
-    <div class="eyebrow">Essenzialità · Imperfezione · Armonia</div>
-    <h2 class="title">Passione per il Giappone</h2>
-    <p class="desc">
-      Linee pulite, materiali naturali, tempo che lascia tracce. Il Giappone come pratica
-      di equilibrio: tra vuoto e pieno, luce e ombra, antico e contemporaneo.
+  <div class="card-body">
+    <h2 class="card-title">Passione per il Giappone</h2>
+    <p class="card-desc">
+      Essenzialità, imperfezione, armonia. Scopri storie, luoghi e ispirazioni
+      dal Giappone che uniscono tradizione e contemporaneità.
     </p>
-
-    <!-- Modifica l’href con il tuo link (Notion, pagina o collezione libri) -->
-    <a class="cta" href="https://tuo-link-destinazione.example" target="_blank" rel="noopener noreferrer">
-      <span class="dot" aria-hidden="true"></span>
-      <span>Scopri di più</span>
+    <a class="card-cta" href="https://tuo-link-destinazione.example" target="_blank" rel="noopener noreferrer">
+      Scopri di più <span class="arrow">→</span>
     </a>
   </div>
 </article>
