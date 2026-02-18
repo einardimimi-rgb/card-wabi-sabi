@@ -3,61 +3,71 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Modern Japanese Minimal Card (half)</title>
-
+<title>Modern Japanese Minimal – Triple Row</title>
 <style>
   * { box-sizing: border-box; }
 
   body {
     margin: 0;
     background: #efefef;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    padding: 24px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 24px;
-    font-family: "Inter", system-ui, -apple-system, sans-serif;
   }
 
-  /* CARD — metà dimensioni (da 420px a 210px) */
+  /* ====== GRIGLIA 3 CARD ====== */
+  .cards {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(3, 210px); /* 3 card da 210px */
+    align-items: start;
+  }
+
+  /* Responsive: su schermi medi 2 colonne, su piccoli 1 colonna */
+  @media (max-width: 760px){
+    .cards { grid-template-columns: repeat(2, 210px); }
+  }
+  @media (max-width: 520px){
+    .cards { grid-template-columns: 210px; }
+  }
+
+  /* ====== CARD (metà dimensioni) ====== */
   .card {
-    width: min(90vw, 210px);  /* <-- dimezzata */
-    aspect-ratio: 3 / 4;
+    width: 210px;              /* metà della versione grande */
+    aspect-ratio: 3 / 4;       /* mantiene proporzioni 3:4 */
     border-radius: 14px;
     overflow: hidden;
     position: relative;
     background-position: center;
     background-size: cover;
-    background-image: url("https://images.unsplash.com/photo-1582545118502-9761b4f9851d?auto=format&fit=crop&w=1200&q=80");
     box-shadow: 0 10px 22px rgba(0,0,0,0.16);
     filter: saturate(1.05);
   }
 
-  /* Bandiera del Giappone (ridotta) */
+  /* Bandiera del Giappone (in alto a destra, ridotta) */
   .flag {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 26px;   /* prima 38px */
-    height: 16px;  /* prima 24px */
-    background: #fff;
-    border-radius: 3px;
+    top: 8px; right: 8px;
+    width: 26px; height: 16px;
+    background: #fff; border-radius: 3px;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 2px 6px rgba(0,0,0,.25);
   }
   .flag::after {
     content: "";
-    width: 9px; height: 9px;          /* prima 12px */
+    width: 9px; height: 9px;
     background: #d40000; border-radius: 50%;
   }
 
-  /* Gradient per leggibilità testo */
+  /* Gradiente per leggibilità testo nella parte bassa */
   .gradient {
     position: absolute; left: 0; right: 0; bottom: 0;
     height: 45%;
     background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.35), transparent);
   }
 
-  /* Area contenuti (font ridotti) */
+  /* Testi */
   .content {
     position: absolute;
     left: 12px; right: 12px; bottom: 64px;
@@ -65,13 +75,13 @@
   }
   .title {
     margin: 0;
-    font-size: 1.05rem;  /* prima 1.55rem */
+    font-size: 1.05rem;
     font-weight: 700;
     letter-spacing: -0.3px;
   }
   .desc {
     margin: 6px 0 0;
-    font-size: 0.8rem;   /* prima 0.97rem */
+    font-size: 0.8rem;
     line-height: 1.4;
     opacity: 0.95;
   }
@@ -79,41 +89,65 @@
   /* CTA in basso a destra (ridotta) */
   .cta {
     position: absolute;
-    right: 10px;
-    bottom: 10px;
-    background: #e60023;
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 10px;     /* prima 10px 16px */
-    border-radius: 10px;   /* prima 12px */
-    font-weight: 600;
-    font-size: 0.8rem;     /* prima 0.9rem */
+    right: 10px; bottom: 10px;
+    background: #e60023; color: #fff; text-decoration: none;
+    padding: 8px 10px; border-radius: 10px;
+    font-weight: 600; font-size: 0.8rem;
     box-shadow: 0 5px 12px rgba(230,0,35,0.35);
     transition: transform .15s ease, background .2s ease;
   }
   .cta:hover { background: #c0001d; transform: translateY(-2px); }
 </style>
 </head>
-
 <body>
 
-<div class="card">
-  <!-- Flag -->
-  <div class="flag" aria-label="Bandiera del Giappone"></div>
+<div class="cards">
 
-  <!-- Gradient -->
-  <div class="gradient" aria-hidden="true"></div>
+  <!-- ===== CARD 1 ===== -->
+  <article class="card"
+    style="background-image:url('https://images.unsplash.com/photo-1582545118502-9761b4f9851d?auto=format&fit=crop&w=1200&q=80');"
+    aria-label="Passione per il Giappone – Arte moderna">
+    <div class="flag" aria-label="Bandiera del Giappone"></div>
+    <div class="gradient" aria-hidden="true"></div>
 
-  <!-- Testi -->
-  <div class="content">
-    <h2 class="title">Passione per il Giappone</h2>
-    <p class="desc">Linee pulite, equilibrio e modernità. Arte e ispirazione minimal giapponese.</p>
-  </div>
+    <div class="content">
+      <h3 class="title">Passione per il Giappone</h3>
+      <p class="desc">Linee pulite, equilibrio e modernità. Arte e ispirazione minimal.</p>
+    </div>
 
-  <!-- CTA (link completo) -->
-  <a class="cta" href="https://tuo-link-destinazione.example" target="_blank" rel="noopener noreferrer">
-    Scopri di più
-  </a>
+    <a class="cta" href="https://tuo-link-1.example" target="_blank" rel="noopener">Scopri di più</a>
+  </article>
+
+  <!-- ===== CARD 2 ===== -->
+  <article class="card"
+    style="background-image:url('https://images.unsplash.com/photo-1563298723-dcfebaa392e3?auto=format&fit=crop&w=1200&q=80');"
+    aria-label="Kyoto – Tradizione e design">
+    <div class="flag" aria-label="Bandiera del Giappone"></div>
+    <div class="gradient" aria-hidden="true"></div>
+
+    <div class="content">
+      <h3 class="title">Kyoto · Tradizione</h3>
+      <p class="desc">Templi, legno, carta. La calma del design giapponese senza tempo.</p>
+    </div>
+
+    <a class="cta" href="https://tuo-link-2.example" target="_blank" rel="noopener">Scopri di più</a>
+  </article>
+
+  <!-- ===== CARD 3 ===== -->
+  <article class="card"
+    style="background-image:url('https://images.unsplash.com/photo-1529904783670-6a70e51b3d17?auto=format&fit=crop&w=1200&q=80');"
+    aria-label="Tokyo – Modernità e ritmo">
+    <div class="flag" aria-label="Bandiera del Giappone"></div>
+    <div class="gradient" aria-hidden="true"></div>
+
+    <div class="content">
+      <h3 class="title">Tokyo · Modernità</h3>
+      <p class="desc">Neon, architetture e grafica. La visione contemporanea del Giappone.</p>
+    </div>
+
+    <a class="cta" href="https://tuo-link-3.example" target="_blank" rel="noopener">Scopri di più</a>
+  </article>
+
 </div>
 
 </body>
