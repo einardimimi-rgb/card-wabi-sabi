@@ -2,84 +2,145 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=3" />
-<title>Card 30x40 – dimensione fissa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Card Giappone 30x40</title>
+
 <style>
-  :root{
-    --bg: #ffffff;
-    --ink:#222;
-    --muted:#666;
-    --radius:60px;
-    --border:#e6e6e6;
-    --accent:#c0392b;
-  }
-  *{ box-sizing:border-box }
+  * { box-sizing: border-box; }
 
-  body{
-    margin:10; padding:35px; background:#f7f7f7;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    display:flex; align-items:center; justify-content:center; min-height:50vh;
+  body {
+    margin: 0;
+    background: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   }
 
-  .card-fixed{
-    width: 300px;     /* ≈ 30 cm @96dpi */
-    height: 300px;    /* ≈ 40 cm @96dpi */
-    background: var(--bg);
-    color: var(--ink);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  /* CARD 3:4 */
+  .card {
+    width: min(90vw, 420px);       /* dimensione visiva */
+    aspect-ratio: 3 / 4;           /* mantiene 30x40 */
+    border-radius: 16px;
     overflow: hidden;
-    display: grid;
-    grid-template-rows: 58% 42%;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18);
+    background-size: cover;
+    background-position: center;
+    background-image: url("https://images.unsplash.com/photo-1545569341-9eb8b30979d5?auto=format&fit=crop&w=1600&q=80"); 
   }
 
-  .card-media img{
-    width:100%; height:100%; object-fit: cover; display:block;
+  /* BANDIERA DEL GIAPPONE */
+  .flag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 42px;
+    height: 28px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .card-body{
-    display:grid; grid-template-rows:auto 1fr auto;
-    gap: 5px; padding: 5px;
+  .flag::after {
+    content: "";
+    width: 14px;
+    height: 14px;
+    background: #d30000;
+    border-radius: 50%;
   }
-  .card-title{ margin:0; font-size: 1.0rem; line-height:0.6; font-weight: 800; }
-  .card-desc{ margin:0; font-size: 0.5rem; line-height:0.3; color: var(--muted); }
 
-  .card-cta{
-    justify-self: start;
-    display:inline-flex; align-items:center; gap:6px;
-    background: var(--accent); color:#fff; text-decoration:none;
-    padding: 14px 20px; border-radius: 12px; font-weight: 800;
-    transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
-    box-shadow: 0 5px 10px rgba(192,57,43,.25);
-    font-size: 1rem;
+  /* OVERLAY PER LEGGIBILITÀ DEL TESTO */
+  .gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 45%;
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.65),
+      rgba(0,0,0,0.25),
+      rgba(0,0,0,0)
+    );
   }
-  .card-cta:hover{ background:#a83225; transform: translateY(-1px); }
 
-  @media (prefers-reduced-motion: reduce){
-    .card-cta, .card-cta:hover{ transition:none; transform:none; }
+  /* AREA TESTO */
+  .content {
+    position: absolute;
+    bottom: 70px;
+    left: 20px;
+    right: 20px;
+    color: white;
+  }
+
+  .title {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .desc {
+    margin-top: 6px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    opacity: 0.9;
+  }
+
+  /* CTA IN BASSO A DESTRA */
+  .cta {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    padding: 10px 14px;
+    background: #c0392b;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 6px 16px rgba(192,57,43,.35);
+    transition: background .2s ease, transform .2s ease;
+  }
+
+  .cta:hover {
+    background: #a83225;
+    transform: translateY(-2px);
   }
 </style>
 </head>
+
 <body>
 
-<article class="card-fixed" role="region" aria-label="Card 30x40 – dimensione fissa">
-  <div class="card-media">
-    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7f?auto=format&fit=crop&w=1600&q=80"
-         alt="Paesaggio giapponese minimal in stile wabi-sabi">
+<div class="card">
+
+  <!-- Bandiera Giappone -->
+  <div class="flag"></div>
+
+  <!-- Overlay sfumato per testo -->
+  <div class="gradient"></div>
+
+  <!-- Testo -->
+  <div class="content">
+    <h2 class="title">Passione per il Giappone</h2>
+    <p class="desc">
+      Essenzialità, armonia e tradizione. Scopri la bellezza senza tempo dell’arte giapponese.
+    </p>
   </div>
 
-  <div class="card-body">
-    <h2 class="card-title">Passione per il Giappone</h2>
-    <p class="card-desc">
-      Essenzialità, imperfezione, armonia. Scopri storie, luoghi e ispirazioni
-      dal Giappone che uniscono tradizione e contemporaneità.
-    </p>
-    <a class="card-cta" href="https://tuo-link-destinazione.example" target="_blank" rel="noopener noreferrer">
-      Scopri di più <span class="arrow">→</span>
-    </a>
-  </div>
-</article>
+  <!-- CTA -->
+  <a class="cta" href="https://tuo-link-destinazione.example" target="_blank">
+    Scopri di più →
+  </a>
+
+</div>
 
 </body>
 </html>
