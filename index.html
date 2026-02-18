@@ -3,143 +3,117 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Card Giappone 30x40</title>
+<title>Modern Japanese Minimal Card (half)</title>
 
 <style>
   * { box-sizing: border-box; }
 
   body {
     margin: 0;
-    background: #f4f4f4;
+    background: #efefef;
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 30px;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    align-items: center;
+    padding: 24px;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
   }
 
-  /* CARD 3:4 */
+  /* CARD — metà dimensioni (da 420px a 210px) */
   .card {
-    width: min(90vw, 420px);       /* dimensione visiva */
-    aspect-ratio: 3 / 4;           /* mantiene 30x40 */
-    border-radius: 16px;
+    width: min(90vw, 210px);  /* <-- dimezzata */
+    aspect-ratio: 3 / 4;
+    border-radius: 14px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,.18);
-    background-size: cover;
     background-position: center;
-    background-image: url("https://images.unsplash.com/photo-1545569341-9eb8b30979d5?auto=format&fit=crop&w=1600&q=80"); 
+    background-size: cover;
+    background-image: url("https://images.unsplash.com/photo-1582545118502-9761b4f9851d?auto=format&fit=crop&w=1200&q=80");
+    box-shadow: 0 10px 22px rgba(0,0,0,0.16);
+    filter: saturate(1.05);
   }
 
-  /* BANDIERA DEL GIAPPONE */
+  /* Bandiera del Giappone (ridotta) */
   .flag {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 42px;
-    height: 28px;
-    background: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0,0,0,.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 8px;
+    right: 8px;
+    width: 26px;   /* prima 38px */
+    height: 16px;  /* prima 24px */
+    background: #fff;
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
   }
-
   .flag::after {
     content: "";
-    width: 14px;
-    height: 14px;
-    background: #d30000;
-    border-radius: 50%;
+    width: 9px; height: 9px;          /* prima 12px */
+    background: #d40000; border-radius: 50%;
   }
 
-  /* OVERLAY PER LEGGIBILITÀ DEL TESTO */
+  /* Gradient per leggibilità testo */
   .gradient {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: absolute; left: 0; right: 0; bottom: 0;
     height: 45%;
-    background: linear-gradient(
-      to top,
-      rgba(0,0,0,0.65),
-      rgba(0,0,0,0.25),
-      rgba(0,0,0,0)
-    );
+    background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.35), transparent);
   }
 
-  /* AREA TESTO */
+  /* Area contenuti (font ridotti) */
   .content {
     position: absolute;
-    bottom: 70px;
-    left: 20px;
-    right: 20px;
-    color: white;
+    left: 12px; right: 12px; bottom: 64px;
+    color: #fff;
   }
-
   .title {
     margin: 0;
-    font-size: 1.4rem;
+    font-size: 1.05rem;  /* prima 1.55rem */
     font-weight: 700;
+    letter-spacing: -0.3px;
   }
-
   .desc {
-    margin-top: 6px;
-    font-size: 0.95rem;
+    margin: 6px 0 0;
+    font-size: 0.8rem;   /* prima 0.97rem */
     line-height: 1.4;
-    opacity: 0.9;
+    opacity: 0.95;
   }
 
-  /* CTA IN BASSO A DESTRA */
+  /* CTA in basso a destra (ridotta) */
   .cta {
     position: absolute;
-    bottom: 16px;
-    right: 16px;
-    padding: 10px 14px;
-    background: #c0392b;
+    right: 10px;
+    bottom: 10px;
+    background: #e60023;
     color: #fff;
-    border-radius: 10px;
     text-decoration: none;
-    font-weight: 700;
-    font-size: 0.9rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 6px 16px rgba(192,57,43,.35);
-    transition: background .2s ease, transform .2s ease;
+    padding: 8px 10px;     /* prima 10px 16px */
+    border-radius: 10px;   /* prima 12px */
+    font-weight: 600;
+    font-size: 0.8rem;     /* prima 0.9rem */
+    box-shadow: 0 5px 12px rgba(230,0,35,0.35);
+    transition: transform .15s ease, background .2s ease;
   }
-
-  .cta:hover {
-    background: #a83225;
-    transform: translateY(-2px);
-  }
+  .cta:hover { background: #c0001d; transform: translateY(-2px); }
 </style>
 </head>
 
 <body>
 
 <div class="card">
+  <!-- Flag -->
+  <div class="flag" aria-label="Bandiera del Giappone"></div>
 
-  <!-- Bandiera Giappone -->
-  <div class="flag"></div>
+  <!-- Gradient -->
+  <div class="gradient" aria-hidden="true"></div>
 
-  <!-- Overlay sfumato per testo -->
-  <div class="gradient"></div>
-
-  <!-- Testo -->
+  <!-- Testi -->
   <div class="content">
     <h2 class="title">Passione per il Giappone</h2>
-    <p class="desc">
-      Essenzialità, armonia e tradizione. Scopri la bellezza senza tempo dell’arte giapponese.
-    </p>
+    <p class="desc">Linee pulite, equilibrio e modernità. Arte e ispirazione minimal giapponese.</p>
   </div>
 
-  <!-- CTA -->
-  <a class="cta" href="https://tuo-link-destinazione.example" target="_blank">
-    Scopri di più →
+  <!-- CTA (link completo) -->
+  <a class="cta" href="https://tuo-link-destinazione.example" target="_blank" rel="noopener noreferrer">
+    Scopri di più
   </a>
-
 </div>
 
 </body>
